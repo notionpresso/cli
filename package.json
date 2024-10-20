@@ -1,7 +1,7 @@
 {
   "name": "@notionpresso/cli",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,7 +20,7 @@
     "vitest": "^2.1.1"
   },
   "bin": {
-    "notion-dump": "./dist/notion-dump.es.js"
+    "npresso": "./dist/notionpresso.es.js"
   },
   "dependencies": {
     "@cozy-blog/notion-client": "^0.0.22",
