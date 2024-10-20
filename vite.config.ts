@@ -3,7 +3,7 @@ import { resolve } from "path";
 import UnpluginTypia from "@ryoppippi/unplugin-typia/vite";
 
 // Library name
-const LIB_NAME = "Notion-Dump";
+const LIB_NAME = "NotionPresso";
 
 export default defineConfig({
   build: {
