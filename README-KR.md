@@ -14,8 +14,7 @@ Notion 페이지의 데이터를 추출하여 로컬에 JSON 형식으로 저장
 1. 프로젝트 클론 및 디렉토리 이동
 
    ```bash
-   git clone https://github.com/meursyphus/react-notion-custom.git
-   cd react-notion-custom
+   git clone https://github.com/notionpresso/cli.git
    ```
 
 2. 의존성 설치
@@ -26,7 +25,7 @@ Notion 페이지의 데이터를 추출하여 로컬에 JSON 형식으로 저장
 
 3. 프로젝트 빌드
    ```bash
-   npm run cli:build
+   npm run build
    ```
 
 ## 사용 방법
@@ -36,7 +35,7 @@ Notion 페이지의 데이터를 추출하여 로컬에 JSON 형식으로 저장
 3. Notion 페이지 URL 얻기
 4. 스크립트 실행
    ```bash
-   node ./packages/notion-dump/dist/notion-dump.es.js --page <NotionPageURL> --auth <YourAPIToken>
+   node ./dist/notionpresso.es.js --page <NotionPageURL> --auth <YourAPIToken>
    ```
 
 ## 옵션 설명

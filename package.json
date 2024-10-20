@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "@cozy-blog/notion-client": "^0.0.22",
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "factory.ts": "^1.4.2"
   },
   "types": "module"
 }
