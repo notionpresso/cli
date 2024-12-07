@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import type { Client } from "@cozy-blog/notion-client";
+import type { Client } from "@notionpresso/api-sdk";
 import * as fs from "fs";
 import * as path from "path";
 

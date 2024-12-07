@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { Client } from "@cozy-blog/notion-client";
+import type { Client } from "@notionpresso/api-sdk";
 import { extractPageIdFromUrl } from "./pageIdExtractor";
 import * as path from "path";
 import { fetchAndSavePageData } from "./dumpPage";
