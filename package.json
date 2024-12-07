@@ -23,7 +23,7 @@
     "notion-dump": "./dist/notion-dump.es.js"
   },
   "dependencies": {
-    "@cozy-blog/notion-client": "^0.0.22",
+    "@notionpresso/api-sdk": "^0.0.1",
     "commander": "^12.1.0"
   },
   "types": "module"
