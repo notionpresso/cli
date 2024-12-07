@@ -21,8 +21,7 @@ notion-dump는 Notion 페이지의 데이터를 추출하여 로컬 파일 시�
 1. 프로젝트 클론 및 디렉토리 이동
 
    ```bash
-   git clone https://github.com/meursyphus/react-notion-custom.git
-   cd react-notion-custom
+   git clone https://github.com/notionpresso/cli.git
    ```
 
 2. 의존성 설치
@@ -36,13 +35,13 @@ notion-dump는 Notion 페이지의 데이터를 추출하여 로컬 파일 시�
 
    ```bash
    // 루트 디렉토리에서 호출
-   npm run cli:build
+   npm run build
    ```
 
 4. 스크립트 실행
 
    ```bash
-   node ./packages/notion-dump/dist/notion-dump.es.js --page <NotionPageURL> --auth <YourAPIToken>
+   node ./dist/notionpresso.es.js --page <NotionPageURL> --auth <YourAPIToken>
    ```
 
    또는 npm link를 사용하여 전역 명령어처럼 사용:

@@ -1,6 +1,6 @@
 // pageIdExtractor.test.ts
 
-import { extractPageIdFromUrl } from "../lib/pageIdExtractor";
+import { extractPageIdFromUrl } from "../lib/page-id-extractor";
 import { describe, it, expect } from "vitest";
 
 describe("extractPageIdFromUrl", () => {
