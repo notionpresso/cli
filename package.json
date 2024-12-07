@@ -23,6 +23,7 @@
     "notion-dump": "./dist/notion-dump.es.js"
   },
   "dependencies": {
+    "@notionpresso/api-sdk": "^0.0.1",
     "commander": "^12.1.0"
   },
   "types": "module"
