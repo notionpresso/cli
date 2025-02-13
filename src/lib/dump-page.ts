@@ -1,7 +1,9 @@
-import { Client } from "@cozy-blog/notion-client";
-import * as fs from "fs";
-import * as path from "path";
-import { updateImageOnBlocks } from "./download-image";
+#!/usr/bin/env node
+
+import type { Client } from '@notionpresso/api-sdk';
+import * as fs from 'fs';
+import * as path from 'path';
+import { updateImageOnBlocks } from './download-image';
 
 export async function fetchAndSavePageData({
   client,
@@ -33,7 +35,7 @@ export async function fetchAndSavePageData({
   fs.mkdirSync(outputDir, { recursive: true });
 
   // Write the updated data to index.json (overwrite if it exists)
-  fs.writeFileSync(outputFile, JSON.stringify(fullPage, null, 2), "utf-8");
+  fs.writeFileSync(outputFile, JSON.stringify(fullPage, null, 2), 'utf-8');
 
   console.log(`Page data saved to ${outputFile}`);
   console.log(`Images saved to ${imageOutDir}`);

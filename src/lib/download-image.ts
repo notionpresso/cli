@@ -1,12 +1,8 @@
-import * as fs from "fs";
-import * as path from "path";
-import { getFileExtension } from "./file-extension-utils";
-import { Block } from "@cozy-blog/notion-client";
-import {
-  getImageUrl,
-  isImageBlock,
-  updateImageUrl,
-} from "./download-image.helper";
+import * as fs from 'fs';
+import * as path from 'path';
+import { getFileExtension } from './file-extension-utils';
+import { Block } from '@notionpresso/api-sdk';
+import { getImageUrl, isImageBlock, updateImageUrl } from './download-image.helper';
 
 async function downloadImage({
   url,
@@ -19,7 +15,7 @@ async function downloadImage({
   const arrayBuffer = await response.arrayBuffer();
   await fs.promises.writeFile(outputPath, Buffer.from(arrayBuffer));
 
-  return response.headers.get("Content-Type") || "";
+  return response.headers.get('Content-Type') || '';
 }
 
 async function updateImageOnBlock(
@@ -32,7 +28,7 @@ async function updateImageOnBlock(
     imageDir: string;
     pageId: string;
   },
-  imageCounter: { count: number },
+  imageCounter: { count: number }
 ): Promise<void> {
   if (isImageBlock(block)) {
     const originalUrl = getImageUrl(block);
@@ -82,8 +78,8 @@ export async function updateImageOnBlocks({
   pageId: string;
   imageCounter?: { count: number };
 }): Promise<void> {
-  const updatePromises = blocks.map((block) =>
-    updateImageOnBlock({ block, imageDir, pageId }, imageCounter),
+  const updatePromises = blocks.map(block =>
+    updateImageOnBlock({ block, imageDir, pageId }, imageCounter)
   );
 
   await Promise.all(updatePromises);
