@@ -20,14 +20,34 @@ interface CLIOptions {
 const program = new Command();
 
 program
-  .requiredOption("--page <pageUrl>", "Notion page URL")
-  .requiredOption("--auth <authToken>", "Notion API authentication token")
-  .option("--dir <dir>", "Output directory", "notion-data")
+  .name('npresso')
+  .description('CLI tool for downloading Notion pages and their assets')
+  .version('0.0.2')
+  
+program
+  .requiredOption(
+    '--page <pageUrl>', 
+    'Notion page ID or URL (e.g., myblog/page-id-123 or just page-id-123). Note: You don\'t need to include "https://www.notion.so/"'
+  )
+  .requiredOption(
+    '--auth <authToken>', 
+    'Notion API integration token (See tutorial: https://notionpresso.com/en/tutorial, or create one at https://www.notion.so/my-integrations)'
+  )
   .option(
-    "--image-dir <dir>",
-    "Output directory for images",
-    "public/notion-data",
-  );
+    '--dir <dir>', 
+    'Directory where the page content will be saved',
+    'notion-data'
+  )
+  .option(
+    '--image-dir <dir>',
+    'Directory where the page images will be saved',
+    'public/notion-data'
+  )
+  .addHelpText('after', `
+Example:
+  $ npresso --page myblog/page-id-123 --auth secret_token...
+  $ npresso --page page-id-123 --auth secret_token... --dir custom-dir --image-dir images
+  `);
 
 program.parse(process.argv);
 
