@@ -1,32 +1,24 @@
-import { Block } from "@cozy-blog/notion-client";
-import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { Block } from '@notionpresso/api-sdk';
+import type { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export type ImageBlockObjectResponseExtended = ImageBlockObjectResponse & {
   blocks: Block[];
 };
 
-export function isImageBlock(
-  block: Block,
-): block is ImageBlockObjectResponseExtended {
-  return block.type === "image";
+export function isImageBlock(block: Block): block is ImageBlockObjectResponseExtended {
+  return block.type === 'image';
 }
 
 function isExternalImage(
-  image: ImageBlockObjectResponseExtended["image"],
-): image is Extract<
-  ImageBlockObjectResponseExtended["image"],
-  { type: "external" }
-> {
-  return image.type === "external";
+  image: ImageBlockObjectResponseExtended['image']
+): image is Extract<ImageBlockObjectResponseExtended['image'], { type: 'external' }> {
+  return image.type === 'external';
 }
 
 function isFileImage(
-  image: ImageBlockObjectResponseExtended["image"],
-): image is Extract<
-  ImageBlockObjectResponseExtended["image"],
-  { type: "file" }
-> {
-  return image.type === "file";
+  image: ImageBlockObjectResponseExtended['image']
+): image is Extract<ImageBlockObjectResponseExtended['image'], { type: 'file' }> {
+  return image.type === 'file';
 }
 
 export function getImageUrl(block: ImageBlockObjectResponseExtended): string {
@@ -35,18 +27,15 @@ export function getImageUrl(block: ImageBlockObjectResponseExtended): string {
   } else if (isFileImage(block.image)) {
     return block.image.file.url;
   }
-  throw new Error("Invalid image type");
+  throw new Error('Invalid image type');
 }
 
-export function updateImageUrl(
-  block: ImageBlockObjectResponseExtended,
-  newUrl: string,
-): void {
+export function updateImageUrl(block: ImageBlockObjectResponseExtended, newUrl: string): void {
   if (isExternalImage(block.image)) {
     block.image.external.url = newUrl;
   } else if (isFileImage(block.image)) {
     block.image.file.url = newUrl;
   } else {
-    throw new Error("Invalid image type");
+    throw new Error('Invalid image type');
   }
 }
