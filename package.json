@@ -1,14 +1,15 @@
 {
   "name": "@notionpresso/cli",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "prepare": "ts-patch install && typia patch"
+    "prepare": "ts-patch install && typia patch",
+    "cli": "node ./dist/notionpresso.es.js"
   },
   "devDependencies": {
     "@ryoppippi/unplugin-typia": "^1.0.6",

@@ -28,7 +28,7 @@ const mimeTypeToExtensionMap: Record<
 };
 
 export function getFileExtensionFromContentType(
-  contentType: string,
+  contentType: string
 ): SupportedImageExtension | undefined {
   return mimeTypeToExtensionMap[contentType as SupportedImageMimeType];
 }
@@ -42,7 +42,7 @@ export function getFileExtensionFromUrl(url: string): string {
 
 export function getFileExtension(
   contentType: string,
-  originalUrl: string,
+  originalUrl: string
 ): SupportedImageExtension {
   const extensionFromContentType = getFileExtensionFromContentType(contentType);
   if (extensionFromContentType) return extensionFromContentType;
@@ -51,7 +51,7 @@ export function getFileExtension(
   if (
     extensionFromUrl &&
     Object.values(mimeTypeToExtensionMap).includes(
-      extensionFromUrl as SupportedImageExtension,
+      extensionFromUrl as SupportedImageExtension
     )
   ) {
     return extensionFromUrl as SupportedImageExtension;

@@ -1,29 +1,29 @@
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import UnpluginTypia from "@ryoppippi/unplugin-typia/vite";
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
 // Library name
-const LIB_NAME = "NotionPresso";
+const LIB_NAME = 'NotionPresso';
 
 export default defineConfig({
   build: {
     // Library specific build configuration
     lib: {
       // Set the entry point of the library
-      entry: resolve(__dirname, "src/lib/index.ts"),
+      entry: resolve(__dirname, 'src/lib/index.ts'),
       name: LIB_NAME,
-      fileName: (format) => `${LIB_NAME.toLowerCase()}.${format}.js`,
+      fileName: format => `${LIB_NAME.toLowerCase()}.${format}.js`,
     },
     rollupOptions: {
       // Specify external dependencies not to be bundled
-      external: ["@cozy-blog/notion-client", "commander", "path", "fs"],
+      external: ['@notionpresso/api-sdk', 'commander', 'path', 'fs'],
       output: {
         // Global variable mapping for UMD build
         globals: {
-          "@cozy-blog/notion-client": "NotionClient",
-          commander: "commander",
-          path: "path",
-          fs: "fs",
+          '@notionpresso/api-sdk': 'NotionClient',
+          commander: 'commander',
+          path: 'path',
+          fs: 'fs',
         },
       },
     },

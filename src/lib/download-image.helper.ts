@@ -1,18 +1,18 @@
-import { Block } from "@cozy-blog/notion-client";
-import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { Block } from "@notionpresso/api-sdk";
+import type { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export type ImageBlockObjectResponseExtended = ImageBlockObjectResponse & {
   blocks: Block[];
 };
 
 export function isImageBlock(
-  block: Block,
+  block: Block
 ): block is ImageBlockObjectResponseExtended {
   return block.type === "image";
 }
 
 function isExternalImage(
-  image: ImageBlockObjectResponseExtended["image"],
+  image: ImageBlockObjectResponseExtended["image"]
 ): image is Extract<
   ImageBlockObjectResponseExtended["image"],
   { type: "external" }
@@ -21,7 +21,7 @@ function isExternalImage(
 }
 
 function isFileImage(
-  image: ImageBlockObjectResponseExtended["image"],
+  image: ImageBlockObjectResponseExtended["image"]
 ): image is Extract<
   ImageBlockObjectResponseExtended["image"],
   { type: "file" }
@@ -40,7 +40,7 @@ export function getImageUrl(block: ImageBlockObjectResponseExtended): string {
 
 export function updateImageUrl(
   block: ImageBlockObjectResponseExtended,
-  newUrl: string,
+  newUrl: string
 ): void {
   if (isExternalImage(block.image)) {
     block.image.external.url = newUrl;

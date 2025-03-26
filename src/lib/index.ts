@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { Client } from "@cozy-blog/notion-client";
+import Client from "@notionpresso/api-sdk";
 import { extractPageIdFromUrl } from "./page-id-extractor";
 import * as path from "path";
 import { fetchAndSavePageData } from "./dump-page";
@@ -9,12 +9,15 @@ import typia from "typia";
 
 const DEFAULT_OUTPUT_DIR = "notion-data";
 const DEFAULT_IMAGE_OUT_DIR = "public/notion-data";
+const DEFAULT_FIELDS = ["title", "url", "description", "favicon", "image"];
 
 interface CLIOptions {
   page: string;
   auth: string;
   dir?: string;
   imageDir?: string;
+  meta?: boolean;
+  fields?: string;
 }
 
 const program = new Command();
@@ -39,6 +42,15 @@ program
     'notion-data'
   )
   .option(
+
+  .option(
+    "--meta",
+    "Fetch bookmark metadata (includes only title, url, description, favicon, image by default)"
+  )
+  .option(
+    "--fields <fields>",
+    "List of fields to include in bookmark (comma separated, optional)"
+  );
     '--image-dir <dir>',
     'Directory where the page images will be saved',
     'public/notion-data'
@@ -65,17 +77,29 @@ const outputDir = path.join(process.cwd(), options.dir || DEFAULT_OUTPUT_DIR);
 const imageOutDir = path.join(
   process.cwd(),
   options.imageDir || DEFAULT_IMAGE_OUT_DIR,
-  pageId,
+  pageId
 );
 
 const client = new Client({ auth: options.auth });
 
-/**
- * fetch and save page data
- */
+const meta = {
+  meta: options.meta,
+  fields: options.fields
+    ? options.fields.split(",")
+    : options.meta
+    ? DEFAULT_FIELDS
+    : undefined,
+};
+
 (async () => {
   try {
-    await fetchAndSavePageData({ client, pageId, outputDir, imageOutDir });
+    await fetchAndSavePageData({
+      client,
+      pageId,
+      outputDir,
+      imageOutDir,
+      meta,
+    });
   } catch (error: any) {
     console.error("Error fetching page data:", error.message);
     process.exit(1);

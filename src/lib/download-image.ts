@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { getFileExtension } from "./file-extension-utils";
-import { Block } from "@cozy-blog/notion-client";
+import type { Block } from "@notionpresso/api-sdk";
 import {
   getImageUrl,
   isImageBlock,
@@ -32,7 +32,7 @@ async function updateImageOnBlock(
     imageDir: string;
     pageId: string;
   },
-  imageCounter: { count: number },
+  imageCounter: { count: number }
 ): Promise<void> {
   if (isImageBlock(block)) {
     const originalUrl = getImageUrl(block);
@@ -83,7 +83,7 @@ export async function updateImageOnBlocks({
   imageCounter?: { count: number };
 }): Promise<void> {
   const updatePromises = blocks.map((block) =>
-    updateImageOnBlock({ block, imageDir, pageId }, imageCounter),
+    updateImageOnBlock({ block, imageDir, pageId }, imageCounter)
   );
 
   await Promise.all(updatePromises);
