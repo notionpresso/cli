@@ -1,7 +1,7 @@
-import Client, { bookmarkPreprocessors } from '@notionpresso/api-sdk';
-import * as fs from 'fs';
-import * as path from 'path';
-import { updateImageOnBlocks } from './download-image';
+import Client, { bookmarkPreprocessors } from "@notionpresso/api-sdk";
+import * as fs from "fs";
+import * as path from "path";
+import { updateImageOnBlocks } from "./download-image";
 
 interface Meta {
   meta?: boolean;
@@ -9,8 +9,8 @@ interface Meta {
 }
 
 function removeOriginalBookmarkProperty(blocks: any[]): any[] {
-  return blocks.map(block => {
-    if (block.type === 'notionpresso_bookmark' && block.bookmark) {
+  return blocks.map((block) => {
+    if (block.type === "notionpresso_bookmark" && block.bookmark) {
       const { bookmark, ...rest } = block;
       return rest;
     }
@@ -43,19 +43,22 @@ export async function fetchAndSavePageData({
   const fullPage = await client.fetchFullPage(pageId);
 
   if (meta?.meta) {
-    console.log('Fetching bookmark metadata...');
+    console.log("Fetching bookmark metadata...");
 
     try {
-      fullPage.blocks = await bookmarkPreprocessors.processBlocks(fullPage.blocks, {
-        meta: meta.meta,
-        fields: meta.fields,
-      });
+      fullPage.blocks = await bookmarkPreprocessors.processBlocks(
+        fullPage.blocks,
+        {
+          meta: meta.meta,
+          fields: meta.fields,
+        }
+      );
 
       fullPage.blocks = removeOriginalBookmarkProperty(fullPage.blocks);
 
-      console.log('Bookmark metadata fetch completed');
+      console.log("Bookmark metadata fetch completed");
     } catch (error) {
-      console.error('Error transforming bookmarks:', (error as Error).message);
+      console.error("Error transforming bookmarks:", (error as Error).message);
     }
   }
 
@@ -75,7 +78,7 @@ export async function fetchAndSavePageData({
   fs.mkdirSync(outputDir, { recursive: true });
 
   // Write the updated data to index.json (overwrite if it exists)
-  fs.writeFileSync(outputFile, JSON.stringify(fullPage, null, 2), 'utf-8');
+  fs.writeFileSync(outputFile, JSON.stringify(fullPage, null, 2), "utf-8");
 
   console.log(`Page data saved to ${outputFile}`);
   console.log(`Images saved to ${imageOutDir}`);
